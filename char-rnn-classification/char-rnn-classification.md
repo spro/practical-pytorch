@@ -512,17 +512,19 @@ You can pick out bright spots off the main axis that show which languages it gue
 
 
 ```python
-def predict(input_name):
+def predict(input_name, n_predictions=3):
     print('\n> %s' % input_name)
     output = evaluate(input_name)
-    
-    # Get top 3 languages
-    top3v, top3i = output.data.topk(3, 1, True)
-    
-    for i in range(3):
-        value = top3v[0][i]
-        lang_index = top3i[0][i]
+
+    # Get top N languages
+    topv, topi = output.data.topk(n_predictions, 1, True)
+    predictions = []
+
+    for i in range(n_predictions):
+        value = topv[0][i]
+        lang_index = topi[0][i]
         print('(%.2f) %s' % (value, all_langs[lang_index]))
+        predictions.append([value, all_langs[lang_index]])
 
 predict('Dovesky')
 predict('Jackson')
@@ -546,8 +548,11 @@ The final versions of the scripts [in the Practical PyTorch repo](https://github
 * `model.py` (defines the RNN)
 * `train.py` (runs training)
 * `predict.py` (runs `predict()` with command line arguments)
+* `server.py` (serve prediction as a JSON API with bottle.py)
 
-Running `train.py` will train and save the network, and then you can use `predict.py`: 
+Run `train.py` to train and save the network.
+
+Run `predict.py` with a name to view predictions: 
 
 ```
 $ python predict.py Hazaki
@@ -555,3 +560,5 @@ $ python predict.py Hazaki
 (-1.39) Polish
 (-3.51) Czech
 ```
+
+Run `server.py` and visit http://localhost:5533/Yourname to get JSON output of predictions.

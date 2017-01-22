@@ -14,15 +14,20 @@ def evaluate(input_name):
 
     return output
 
-def predict(input_name):
+def predict(input_name, n_predictions=3):
     output = evaluate(input_name)
 
-    # Get top 3 languages
-    top3v, top3i = output.data.topk(3, 1, True)
+    # Get top N languages
+    topv, topi = output.data.topk(n_predictions, 1, True)
+    predictions = []
 
-    for i in range(3):
-        value = top3v[0][i]
-        lang_index = top3i[0][i]
+    for i in range(n_predictions):
+        value = topv[0][i]
+        lang_index = topi[0][i]
         print('(%.2f) %s' % (value, all_langs[lang_index]))
+        predictions.append([value, all_langs[lang_index]])
 
-predict(sys.argv[1])
+    return predictions
+
+if __name__ == '__main__':
+    predict(sys.argv[1])
