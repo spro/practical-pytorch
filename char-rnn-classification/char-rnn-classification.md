@@ -114,12 +114,14 @@ readNames('data/Polish.txt')[-5:]
 ```python
 # Build the lang_names dictionary, a list of names per language
 lang_names = {}
+all_langs = []
+
 for filename in filenames:
     lang = filename.split('/')[-1].split('.')[0]
+    all_langs.append(lang)
     names = readNames(filename)
     lang_names[lang] = names
-    
-all_langs = list(lang_names.keys())
+
 n_langs = len(all_langs)
 ```
 
@@ -270,10 +272,10 @@ output
     Variable containing:
     
     Columns 0 to 9 
-    -2.9695 -2.9078 -2.9083 -2.8748 -2.8829 -2.9186 -2.7794 -2.9506 -2.9847 -2.8669
+    -2.8363 -2.9264 -2.7647 -2.8872 -2.9624 -2.9184 -2.8949 -2.9163 -2.8601 -2.9167
     
     Columns 10 to 17 
-    -2.9461 -2.9727 -2.8155 -2.8060 -2.8545 -2.8203 -2.8233 -2.9823
+    -2.8651 -2.9171 -2.9242 -2.9489 -2.8558 -2.7984 -2.9627 -2.8961
     [torch.FloatTensor of size 1x18]
 
 
@@ -297,7 +299,7 @@ classFromOutput(output)
 
 
 
-    ('Greek', 6)
+    ('Czech', 2)
 
 
 
@@ -320,16 +322,16 @@ for i in range(10):
     print('lang =', lang, '/ name =', name)
 ```
 
-    lang = English / name = Vaughan
-    lang = German / name = Kaufer
-    lang = Portuguese / name = Pinho
-    lang = Polish / name = Zuraw
-    lang = Portuguese / name = Fonseca
-    lang = Czech / name = Vlasek
-    lang = Greek / name = Spyridis
-    lang = Portuguese / name = Machado
-    lang = Korean / name = Hung
-    lang = Dutch / name = Peerenboom
+    lang = Russian / name = Avksentiev
+    lang = Chinese / name = Loong
+    lang = Chinese / name = Won
+    lang = Portuguese / name = Medeiros
+    lang = Arabic / name = Khouri
+    lang = English / name = Drew
+    lang = Spanish / name = Aberquero
+    lang = Portuguese / name = Paredes
+    lang = German / name = Warner
+    lang = Portuguese / name = Paredes
 
 
 # Training the Network
@@ -405,25 +407,25 @@ for epoch in range(1, n_epochs):
         current_loss = 0
 ```
 
-    5000 (2544.19) Cunningham / Russian ✗ (Scottish)
-    10000 (2215.36) Avgerinos / Greek ✓
-    15000 (1991.38) Van / Chinese ✗ (Vietnamese)
-    20000 (1905.66) Alduino / Italian ✓
-    25000 (1750.61) Macias / Arabic ✗ (Spanish)
-    30000 (1770.22) Shahovsky / Polish ✗ (Russian)
-    35000 (1697.24) Stenger / Dutch ✗ (German)
-    40000 (1612.28) Jollenbeck / German ✓
-    45000 (1605.89) Jing / Chinese ✓
-    50000 (1502.48) Torres / Spanish ✓
-    55000 (1477.73) Shunsen / Dutch ✗ (Japanese)
-    60000 (1433.52) Chun / Chinese ✗ (Korean)
-    65000 (1403.85) Rodriquez / Spanish ✓
-    70000 (1422.60) Chau / Chinese ✗ (Vietnamese)
-    75000 (1327.08) Brahms / Arabic ✗ (German)
-    80000 (1342.05) Gaber / Arabic ✓
-    85000 (1331.00) Gallchobhar / Scottish ✗ (Irish)
-    90000 (1274.62) Rose / French ✓
-    95000 (1302.48) Amerighi / Italian ✓
+    5000 (2593.43) Jedynak / Czech ✗ (Polish)
+    10000 (2242.66) Chemlik / Polish ✗ (Czech)
+    15000 (2013.64) Zavala / Japanese ✗ (Spanish)
+    20000 (1925.87) Eatros / Portuguese ✗ (Greek)
+    25000 (1806.08) Macclelland / Italian ✗ (Irish)
+    30000 (1702.71) Shamahov / Russian ✓
+    35000 (1734.55) Maroun / Arabic ✓
+    40000 (1627.01) Ughi / Italian ✓
+    45000 (1648.78) Topham / Scottish ✗ (English)
+    50000 (1544.03) Tosell / Irish ✗ (Spanish)
+    55000 (1507.23) Watnabe / English ✗ (Japanese)
+    60000 (1435.26) Horoshkevich / Russian ✓
+    65000 (1469.86) Oorschot / English ✗ (Dutch)
+    70000 (1415.47) Cassidy / Irish ✓
+    75000 (1349.67) Konstantatos / Greek ✓
+    80000 (1395.10) Cabral / Portuguese ✓
+    85000 (1373.49) Bosch / Scottish ✗ (German)
+    90000 (1329.50) Schuchert / German ✓
+    95000 (1338.40) Klerk / Dutch ✓
 
 
 # Plotting the Results
@@ -443,7 +445,7 @@ plt.plot(all_losses)
 
 
 
-    [<matplotlib.lines.Line2D at 0x1103c5a58>]
+    [<matplotlib.lines.Line2D at 0x1103c3a58>]
 
 
 
@@ -504,7 +506,7 @@ plt.show()
 ![png](output_32_0.png)
 
 
-You can pick out bright spots off the main axis that show which languages it guesses incorrectly, e.g. Korean for Chinese. It seems to do very well with Vietnamese (perhaps because of the tiny training set), and very poorly with English (perhaps because of overlap with other languages).
+You can pick out bright spots off the main axis that show which languages it guesses incorrectly, e.g. Korean for Chinese. It seems to do very well with Greek, and very poorly with English (perhaps because of overlap with other languages).
 
 # Running on User Input
 
@@ -528,14 +530,14 @@ predict('Jackson')
 
     
     > Dovesky
-    (-0.73) Russian
-    (-1.29) Czech
-    (-2.60) English
+    (-0.77) Czech
+    (-0.94) Russian
+    (-2.73) English
     
     > Jackson
-    (-0.09) Scottish
-    (-3.02) English
-    (-3.93) Russian
+    (-0.22) Scottish
+    (-2.54) English
+    (-3.08) Russian
 
 
 The final versions of the scripts [in the Practical PyTorch repo](https://github.com/spro/practical-pytorch) split the above code into a few files:
@@ -543,6 +545,13 @@ The final versions of the scripts [in the Practical PyTorch repo](https://github
 * `data.py` (loads files)
 * `model.py` (defines the RNN)
 * `train.py` (runs training)
-* `evaluate.py` (creates confusion matrix)
 * `predict.py` (runs `predict()` with command line arguments)
 
+Running `train.py` will train and save the network, and then you can use `predict.py`: 
+
+```
+$ python predict.py Hazaki
+(-0.42) Japanese
+(-1.39) Polish
+(-3.51) Czech
+```
