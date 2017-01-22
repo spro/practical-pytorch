@@ -17,21 +17,6 @@ Specifically, we'll train on a few thousand last names over 18 languages of orig
 (-2.83) Dutch
 ```
 
----
-
-## Table of Contents
-
-* [Preparing the Data](#Preparing-the-Data)
-* [Turning Names into Tensors](#Turning-Names-into-Tensors)
-* [Creating the Network](#Creating-the-Network)
-* [Preparing for Training](#Preparing-for-Training)
-* [Training the Network](#Training-the-Network)
-* [Plotting the Results](#Plotting-the-Results)
-* [Evaluating the Results](#Evaluating-the-Results)
-* [Running on User Input](#Running-on-User-Input)
-
----
-
 # Preparing the Data
 
 Included in the repo are 18 plain text files organized by language - from Arabic to Korean to Polish to Vietnamese.
