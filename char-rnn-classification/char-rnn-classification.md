@@ -6,15 +6,15 @@ We will be building and training a basic character-level RNN to classify words. 
 Specifically, we'll train on a few thousand last names over 18 languages of origin, and predict which language a name is from just based on the spelling:
 
 ```
-> Dovesky
-(-0.20) Czech
-(-2.12) Russian
-(-3.57) English
+$ python predict.py Hinton
+(-0.47) Scottish
+(-1.52) English
+(-3.57) Irish
 
-> Jackson
-(-0.18) Scottish
-(-2.78) English
-(-2.83) Dutch
+$ python predict.py Schmidhuber
+(-0.19) German
+(-2.48) Czech
+(-2.68) Dutch
 ```
 
 # Preparing the Data
@@ -29,32 +29,11 @@ We want to end up with a dictionary of lists of names per language, `{language: 
 ```python
 import glob
 
-filenames = glob.glob('data/*.txt')
-filenames
+filenames = glob.glob('../data/names/*.txt')
+print(filenames)
 ```
 
-
-
-
-    ['data/Arabic.txt',
-     'data/Chinese.txt',
-     'data/Czech.txt',
-     'data/Dutch.txt',
-     'data/English.txt',
-     'data/French.txt',
-     'data/German.txt',
-     'data/Greek.txt',
-     'data/Irish.txt',
-     'data/Italian.txt',
-     'data/Japanese.txt',
-     'data/Korean.txt',
-     'data/Polish.txt',
-     'data/Portuguese.txt',
-     'data/Russian.txt',
-     'data/Scottish.txt',
-     'data/Spanish.txt',
-     'data/Vietnamese.txt']
-
+    ['../data/names/Arabic.txt', '../data/names/Chinese.txt', '../data/names/Czech.txt', '../data/names/Dutch.txt', '../data/names/English.txt', '../data/names/French.txt', '../data/names/German.txt', '../data/names/Greek.txt', '../data/names/Irish.txt', '../data/names/Italian.txt', '../data/names/Japanese.txt', '../data/names/Korean.txt', '../data/names/Polish.txt', '../data/names/Portuguese.txt', '../data/names/Russian.txt', '../data/names/Scottish.txt', '../data/names/Spanish.txt', '../data/names/Vietnamese.txt']
 
 
 
@@ -68,14 +47,10 @@ def stripAccents(s):
         if unicodedata.category(c) != 'Mn'
     )
 
-stripAccents('Ślusàrski')
+print(stripAccents('Ślusàrski'))
 ```
 
-
-
-
-    'Slusarski'
-
+    Slusarski
 
 
 
@@ -85,14 +60,10 @@ def readNames(filename):
     names = open(filename).read().strip().split('\n')
     return [stripAccents(name) for name in names]
 
-readNames('data/Polish.txt')[-5:]
+print(filenames[0], readNames(filenames[0])[:5])
 ```
 
-
-
-
-    ['Zdunowski', 'Zielinski', 'Ziemniak', 'Zientek', 'Zuraw']
-
+    ../data/names/Arabic.txt ['Khoury', 'Nahas', 'Daher', 'Gerges', 'Nazari']
 
 
 
@@ -114,14 +85,10 @@ Now we have `lang_names`, a dictionary mapping each language to a list of names.
 
 
 ```python
-lang_names['Italian'][:5]
+print(lang_names['Italian'][:5])
 ```
 
-
-
-
     ['Abandonato', 'Abatangelo', 'Abatantuono', 'Abate', 'Abategiovanni']
-
 
 
 # Turning Names into Tensors
@@ -163,11 +130,8 @@ def nameToTensor(name):
 
 
 ```python
-letterToTensor('J')
+print(letterToTensor('J'))
 ```
-
-
-
 
     
     
@@ -183,19 +147,15 @@ letterToTensor('J')
     Columns 39 to 51 
         0     0     0     0     0     0     0     0     0     0     0     0     0
     [torch.FloatTensor of size 1x52]
-
+    
 
 
 
 ```python
-nameToTensor('Jones').size()
+print(nameToTensor('Jones').size())
 ```
 
-
-
-
     torch.Size([5, 1, 52])
-
 
 
 # Creating the Network
@@ -248,21 +208,18 @@ input = Variable(nameToTensor('Albert'))
 hidden = Variable(torch.zeros(1, n_hidden))
 
 output, next_hidden = rnn(input[0], hidden)
-output
+print(output)
 ```
-
-
-
 
     Variable containing:
     
     Columns 0 to 9 
-    -2.8363 -2.9264 -2.7647 -2.8872 -2.9624 -2.9184 -2.8949 -2.9163 -2.8601 -2.9167
+    -2.9287 -2.9427 -2.8622 -2.8814 -3.0286 -2.9597 -2.8905 -2.9284 -2.7817 -2.8260
     
     Columns 10 to 17 
-    -2.8651 -2.9171 -2.9242 -2.9489 -2.8558 -2.7984 -2.9627 -2.8961
+    -2.7812 -2.8558 -2.9321 -2.9517 -2.9065 -2.9438 -2.8470 -2.8163
     [torch.FloatTensor of size 1x18]
-
+    
 
 
 As you can see the output is a `<1 x n_classes>` Tensor, where every item is the likelihood of that class (higher is more likely).
@@ -278,14 +235,10 @@ def classFromOutput(output):
     class_i = top_i[0][0]
     return all_langs[class_i], class_i
 
-classFromOutput(output)
+print(classFromOutput(output))
 ```
 
-
-
-
-    ('Czech', 2)
-
+    ('Japanese', 10)
 
 
 We will also want a quick way to get a training example (a name and its language):
@@ -307,16 +260,16 @@ for i in range(10):
     print('lang =', lang, '/ name =', name)
 ```
 
-    lang = Russian / name = Avksentiev
-    lang = Chinese / name = Loong
-    lang = Chinese / name = Won
-    lang = Portuguese / name = Medeiros
-    lang = Arabic / name = Khouri
-    lang = English / name = Drew
-    lang = Spanish / name = Aberquero
-    lang = Portuguese / name = Paredes
-    lang = German / name = Warner
-    lang = Portuguese / name = Paredes
+    lang = Portuguese / name = Gouveia
+    lang = Dutch / name = Lyon
+    lang = Polish / name = Sobol
+    lang = Korean / name = Park 
+    lang = Scottish / name = Ritchie
+    lang = Arabic / name = Asker
+    lang = Spanish / name = Gomez
+    lang = Italian / name = Alesi
+    lang = Scottish / name = Walker
+    lang = Italian / name = Arnoni
 
 
 # Training the Network
@@ -392,25 +345,25 @@ for epoch in range(1, n_epochs):
         current_loss = 0
 ```
 
-    5000 (2593.43) Jedynak / Czech ✗ (Polish)
-    10000 (2242.66) Chemlik / Polish ✗ (Czech)
-    15000 (2013.64) Zavala / Japanese ✗ (Spanish)
-    20000 (1925.87) Eatros / Portuguese ✗ (Greek)
-    25000 (1806.08) Macclelland / Italian ✗ (Irish)
-    30000 (1702.71) Shamahov / Russian ✓
-    35000 (1734.55) Maroun / Arabic ✓
-    40000 (1627.01) Ughi / Italian ✓
-    45000 (1648.78) Topham / Scottish ✗ (English)
-    50000 (1544.03) Tosell / Irish ✗ (Spanish)
-    55000 (1507.23) Watnabe / English ✗ (Japanese)
-    60000 (1435.26) Horoshkevich / Russian ✓
-    65000 (1469.86) Oorschot / English ✗ (Dutch)
-    70000 (1415.47) Cassidy / Irish ✓
-    75000 (1349.67) Konstantatos / Greek ✓
-    80000 (1395.10) Cabral / Portuguese ✓
-    85000 (1373.49) Bosch / Scottish ✗ (German)
-    90000 (1329.50) Schuchert / German ✓
-    95000 (1338.40) Klerk / Dutch ✓
+    5000 (2602.65) Poletti / Polish ✗ (Italian)
+    10000 (2216.47) Gu / Vietnamese ✗ (Korean)
+    15000 (2042.95) Bonhomme / Polish ✗ (French)
+    20000 (1895.40) Crook / Scottish ✗ (English)
+    25000 (1784.32) Seif / Korean ✗ (Arabic)
+    30000 (1749.08) Gutteridge / Irish ✗ (English)
+    35000 (1571.16) Golovach / Dutch ✗ (Russian)
+    40000 (1535.68) Cao / Vietnamese ✓
+    45000 (1509.41) Rousseau / French ✓
+    50000 (1581.49) Brose / Scottish ✗ (German)
+    55000 (1483.82) Kerner / German ✓
+    60000 (1423.75) Kwang  / Korean ✓
+    65000 (1444.98) Filipowski / Polish ✓
+    70000 (1377.12) Kolbe / Dutch ✗ (German)
+    75000 (1393.07) Ramires / Portuguese ✓
+    80000 (1340.71) Giles / Portuguese ✗ (French)
+    85000 (1356.88) Moulin / Irish ✗ (French)
+    90000 (1390.55) Vo / Vietnamese ✓
+    95000 (1327.30) Hass / English ✗ (German)
 
 
 # Plotting the Results
@@ -430,7 +383,7 @@ plt.plot(all_losses)
 
 
 
-    [<matplotlib.lines.Line2D at 0x1103c3a58>]
+    [<matplotlib.lines.Line2D at 0x1104bc550>]
 
 
 
@@ -491,7 +444,7 @@ plt.show()
 ![png](output_32_0.png)
 
 
-You can pick out bright spots off the main axis that show which languages it guesses incorrectly, e.g. Korean for Chinese. It seems to do very well with Greek, and very poorly with English (perhaps because of overlap with other languages).
+You can pick out bright spots off the main axis that show which languages it guesses incorrectly, e.g. Chinese for Korean, and Spanish for Italian. It seems to do very well with Greek, and very poorly with English (perhaps because of overlap with other languages).
 
 # Running on User Input
 
@@ -517,14 +470,14 @@ predict('Jackson')
 
     
     > Dovesky
-    (-0.77) Czech
-    (-0.94) Russian
-    (-2.73) English
+    (-0.90) Russian
+    (-1.32) Polish
+    (-1.86) Czech
     
     > Jackson
-    (-0.22) Scottish
-    (-2.54) English
-    (-3.08) Russian
+    (-0.23) Scottish
+    (-2.39) English
+    (-3.40) Russian
 
 
 The final versions of the scripts [in the Practical PyTorch repo](https://github.com/spro/practical-pytorch) split the above code into a few files:

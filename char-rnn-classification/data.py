@@ -3,7 +3,7 @@ import glob
 import unicodedata
 import string
 
-filenames = glob.glob('data/*.txt')
+filenames = glob.glob('../data/names/*.txt')
 
 # Turn a Unicode string to plain ASCII, thanks to http://stackoverflow.com/a/518232/2809427
 def stripAccents(s):
