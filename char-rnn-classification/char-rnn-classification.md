@@ -3,7 +3,7 @@
 
 We will be building and training a basic character-level RNN to classify words. A character-level RNN reads words as a series of characters - outputting a prediction and "hidden state" at each step, feeding its previous hidden state into each next step. We take the final prediction to be the output, i.e. which class the word belongs to.
 
-Specifically, we'll train on a few thousand last names over 18 languages of origin, and predict which language a name is from just based on the spelling:
+Specifically, we'll train on a few thousand surnames from 18 languages of origin, and predict which language a name is from based on the spelling:
 
 ```
 $ python predict.py Hinton
@@ -19,11 +19,9 @@ $ python predict.py Schmidhuber
 
 # Preparing the Data
 
-Included in the repo are 18 plain text files organized by language - from Arabic to Korean to Polish to Vietnamese.
+Included in the `data/names` directory are 18 text files named as "[Language].txt". Each file contains a bunch of names, one name per line, mostly romanized (but we still need to convert from Unicode to ASCII).
 
-The files are all in the `data/` directory, named as "Language.txt". Each file contains a bunch of names, one name per line, and they are mostly romanized but we still need to convert from Unicode to ASCII.
-
-We want to end up with a dictionary of lists of names per language, `{language: [names ...]}`
+We'll end up with a dictionary of lists of names per language, `{language: [names ...]}`
 
 
 ```python
