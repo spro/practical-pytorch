@@ -13,20 +13,20 @@ def stripAccents(s):
     )
 
 # Read a file and split into lines
-def readNames(filename):
-    names = open(filename).read().strip().split('\n')
-    return [stripAccents(name) for name in names]
+def readLines(filename):
+    lines = open(filename).read().strip().split('\n')
+    return [stripAccents(line) for line in lines]
 
-# Build the lang_names dictionary, a list of names per language
-lang_names = {}
-all_langs = []
+# Build the category_lines dictionary, a list of lines per category
+category_lines = {}
+all_categories = []
 for filename in filenames:
-    lang = filename.split('/')[-1].split('.')[0]
-    all_langs.append(lang)
-    names = readNames(filename)
-    lang_names[lang] = names
+    category = filename.split('/')[-1].split('.')[0]
+    all_categories.append(category)
+    lines = readLines(filename)
+    category_lines[category] = lines
 
-n_langs = len(all_langs)
+n_categories = len(all_categories)
 
 all_letters = string.ascii_letters
 n_letters = len(all_letters)
@@ -35,11 +35,11 @@ n_letters = len(all_letters)
 def letterToIndex(letter):
     return all_letters.find(letter)
 
-# Turn a name into a <name_length x 1 x n_letters>,
+# Turn a line into a <line_length x 1 x n_letters>,
 # or an array of one-hot letter vectors
-def nameToTensor(name):
-    tensor = torch.zeros(len(name), 1, n_letters)
-    for li, letter in enumerate(name):
+def lineToTensor(line):
+    tensor = torch.zeros(len(line), 1, n_letters)
+    for li, letter in enumerate(line):
         tensor[li][0][letterToIndex(letter)] = 1
     return tensor
 
