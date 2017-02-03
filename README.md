@@ -15,3 +15,25 @@ These tutorials aim to:
 * [Generating Names with a Character-Level RNN](https://github.com/spro/practical-pytorch/blob/master/char-rnn-generation/char-rnn-generation.ipynb)
 * *WIP* Translation with Sequence to Sequence Networks
 * *TODO* Intent parsing with Sequence to Sequence Networks and Attention
+
+## Get Started
+
+The quickest way to run these on a fresh Linux or Mac machine is to install [Anaconda](https://www.continuum.io/anaconda-overview):
+```
+curl -LO https://repo.continuum.io/archive/Anaconda3-4.3.0-Linux-x86_64.sh
+bash Anaconda3-4.3.0-Linux-x86_64.sh
+```
+
+Then install PyTorch:
+
+```
+conda install pytorch -c soumith
+```
+
+Then clone this repo and start Jupyter Notebook:
+
+```
+git clone http://github.com/spro/practical-pytorch
+cd practical-pytorch
+jupyter notebook
+```
