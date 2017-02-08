@@ -13,8 +13,8 @@ These tutorials aim to:
 
 * [Classifying Names with a Character-Level RNN](https://github.com/spro/practical-pytorch/blob/master/char-rnn-classification/char-rnn-classification.ipynb)
 * [Generating Names with a Character-Level RNN](https://github.com/spro/practical-pytorch/blob/master/char-rnn-generation/char-rnn-generation.ipynb)
-* *WIP* Translation with Sequence to Sequence Networks
-* *TODO* Intent parsing with Sequence to Sequence Networks and Attention
+* [Translation with a Sequence to Sequence Network and Attention](https://github.com/spro/practical-pytorch/blob/master/seq2seq-translation/seq2seq-translation.ipynb)
+* *WIP* Intent Parsing and Slot Filling with Pointer Networks
 
 ## Get Started
 
