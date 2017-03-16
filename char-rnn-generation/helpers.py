@@ -15,16 +15,14 @@ n_characters = len(all_characters)
 
 def read_file(filename):
     file = unidecode.unidecode(open(filename).read())
-    file_len = len(file)
-    return file, file_len
+    return file, len(file)
 
 # Turning a string into a tensor
 
 def char_tensor(string):
     tensor = torch.zeros(len(string)).long()
     for c in range(len(string)):
-        i = all_characters.index(string[c])
-        tensor[c] = i
+        tensor[c] = all_characters.index(string[c])
     return Variable(tensor)
 
 # Readable time elapsed
