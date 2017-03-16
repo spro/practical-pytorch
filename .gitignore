@@ -2,3 +2,6 @@
 *.swo
 *.pt
 .ipynb_checkpoints
+__pycache__
+data/eng-*.txt
+*.csv
