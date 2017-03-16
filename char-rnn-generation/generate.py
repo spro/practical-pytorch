@@ -1,9 +1,8 @@
-# Practical PyTorch: Generating Shakespeare with a Character-Level RNN
 # https://github.com/spro/practical-pytorch
 
 import torch
 
-from data import *
+from helpers import *
 from model import *
 
 def generate(decoder, prime_str='A', predict_len=100, temperature=0.8):
@@ -32,15 +31,16 @@ def generate(decoder, prime_str='A', predict_len=100, temperature=0.8):
     return predicted
 
 if __name__ == '__main__':
-    decoder = torch.load('char-rnn-generate.pt')
-
     # Parse command line arguments
     import argparse
     argparser = argparse.ArgumentParser()
+    argparser.add_argument('filename', type=str)
     argparser.add_argument('-p', '--prime_str', type=str, default='A')
     argparser.add_argument('-l', '--predict_len', type=int, default=100)
     argparser.add_argument('-t', '--temperature', type=float, default=0.8)
     args = argparser.parse_args()
 
+    decoder = torch.load(args.filename)
+    del args.filename
     print(generate(decoder, **vars(args)))
 

@@ -1,9 +1,41 @@
-The [Jupyter Notebook version of the tutorial](https://github.com/spro/practical-pytorch/blob/master/char-rnn-generation/char-rnn-generation.ipynb) describes the model and steps in more detail.
+# Practical PyTorch: Generating Shakespeare with a Character-Level RNN
 
-Run `train.py` to train and save the network:
+## Dataset
+
+Download [this Shakespeare dataset](https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt) (from [Andrej Karpathy's char-rnn](https://github.com/karpathy/char-rnn)) and save as `shakespeare.txt`
+
+## Jupyter Notebook
+
+The [Jupyter Notebook version of the tutorial](https://github.com/spro/practical-pytorch/blob/master/char-rnn-generation/char-rnn-generation.ipynb) describes the model and steps in detail.
+
+## Python scripts
+
+Run `train.py` with a filename to train and save the network:
 
 ```
-Usage: generate.py [options]
+> python train.py shakespeare.txt
+
+Training for 2000 epochs...
+(10 minutes later)
+Saved as shakespeare.pt
+```
+
+After training the model will be saved as `[filename].pt` &mdash; now run `generate.py` with that filename to generate some new text:
+
+```
+> python generate.py shakespeare.pt --prime_str "Where"
+
+Where, you, and if to our with his drid's
+Weasteria nobrand this by then.
+
+AUTENES:
+It his zersit at he
+```
+
+### Training options
+
+```
+Usage: generate.py [filename] [options]
 
 Options:
 --n_epochs         Number of epochs to train
@@ -14,10 +46,9 @@ Options:
 --chunk_len        Length of chunks to train on at a time
 ```
 
-Run `generate.py` with a name to view predictions:
-
+### Generation options
 ```
-Usage: generate.py [options]
+Usage: generate.py [filename] [options]
 
 Options:
 -p, --prime_str      String to prime generation with
@@ -25,9 +56,3 @@ Options:
 -t, --temperature    Temperature (higher is more chaotic)
 ```
 
-```
-> python generate.py --predict_len 100
-AY:
-Surt him, ach thend all for and for she had
-Shy all word his be and herth the girse, for 'tis thi
-```

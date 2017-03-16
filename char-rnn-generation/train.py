@@ -1,19 +1,18 @@
-# Practical PyTorch: Generating Shakespeare with a Character-Level RNN
 # https://github.com/spro/practical-pytorch
 
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
-import time
-import math
 import argparse
+import os
 
-from data import *
+from helpers import *
 from model import *
 from generate import *
 
 # Parse command line arguments
 argparser = argparse.ArgumentParser()
+argparser.add_argument('filename', type=str)
 argparser.add_argument('--n_epochs', type=int, default=2000)
 argparser.add_argument('--print_every', type=int, default=100)
 argparser.add_argument('--hidden_size', type=int, default=50)
@@ -22,11 +21,15 @@ argparser.add_argument('--learning_rate', type=float, default=0.01)
 argparser.add_argument('--chunk_len', type=int, default=200)
 args = argparser.parse_args()
 
-def time_since(since):
-    s = time.time() - since
-    m = math.floor(s / 60)
-    s -= m * 60
-    return '%dm %ds' % (m, s)
+file, file_len = read_file(args.filename)
+
+def random_training_set(chunk_len):
+    start_index = random.randint(0, file_len - chunk_len)
+    end_index = start_index + chunk_len + 1
+    chunk = file[start_index:end_index]
+    inp = char_tensor(chunk[:-1])
+    target = char_tensor(chunk[1:])
+    return inp, target
 
 decoder = RNN(n_characters, args.hidden_size, n_characters, args.n_layers)
 decoder_optimizer = torch.optim.Adam(decoder.parameters(), lr=args.learning_rate)
@@ -51,7 +54,9 @@ def train(inp, target):
     return loss.data[0] / args.chunk_len
 
 def save():
-    torch.save(decoder, 'char-rnn-generate.pt')
+    save_filename = os.path.splitext(os.path.basename(args.filename))[0] + '.pt'
+    torch.save(decoder, save_filename)
+    print('Saved as %s' % save_filename)
 
 try:
     print("Training for %d epochs..." % args.n_epochs)
