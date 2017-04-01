@@ -16,6 +16,10 @@ Applying recurrent neural networks to natural language tasks, from classificatio
 * *WIP* Sentence Similarity with a Word-Level Autoencoder
 * *WIP* Intent Parsing with Recursive Application of Recurrent Neural Networks
 
+#### Series 2: RNNs for timeseries
+
+* *WIP* Predicting future events with an RNN
+
 ## Recommended Reading
 
 I assume you have at least installed PyTorch, know Python, and understand Tensors:
