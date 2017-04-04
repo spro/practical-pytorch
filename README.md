@@ -25,8 +25,8 @@ Applying recurrent neural networks to natural language tasks, from classificatio
 I assume you have at least installed PyTorch, know Python, and understand Tensors:
 
 * http://pytorch.org/ For installation instructions
-* [Deep Learning with PyTorch: A 60-minute Blitz](https://github.com/pytorch/tutorials/blob/master/Deep%20Learning%20with%20PyTorch.ipynb) to get started with PyTorch in general
-* [jcjohnson's PyTorch examples](https://github.com/jcjohnson/pytorch-examples) for a wide and deep overview
+* [Deep Learning with PyTorch: A 60-minute Blitz](http://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html) to get started with PyTorch in general
+* [jcjohnson's PyTorch examples](https://github.com/jcjohnson/pytorch-examples) for an in depth overview (including custom modules and autograd functions)
 * [Introduction to PyTorch for former Torchies](https://github.com/pytorch/tutorials/blob/master/Introduction%20to%20PyTorch%20for%20former%20Torchies.ipynb) if you are a former Lua Torch user
 
 You should know about Recurrent Neural Networks and how they work:
