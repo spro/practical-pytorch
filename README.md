@@ -12,6 +12,7 @@ Applying recurrent neural networks to natural language tasks, from classificatio
 * *WIP* [Generating Shakespeare with a Character-Level RNN](https://github.com/spro/practical-pytorch/blob/master/char-rnn-generation/char-rnn-generation.ipynb)
 * [Generating Names with a Conditional Character-Level RNN](https://github.com/spro/practical-pytorch/blob/master/conditional-char-rnn/conditional-char-rnn.ipynb)
 * 🔥 [Translation with a Sequence to Sequence Network and Attention](https://github.com/spro/practical-pytorch/blob/master/seq2seq-translation/seq2seq-translation.ipynb)
+* [Exploring Word Vectors with GloVe](https://github.com/spro/practical-pytorch/blob/master/glove-word-vectors/glove-word-vectors.ipynb)
 * *WIP* Sentiment Analysis with a Word-Level RNN and GloVe Embeddings
 * *WIP* Sentence Similarity with a Word-Level Autoencoder
 * *WIP* Intent Parsing with Recursive Application of Recurrent Neural Networks
