@@ -115,7 +115,7 @@ class Environment:
         """Start a new episode by resetting grid and agent"""
         self.grid.reset()
         self.agent.reset()
-        c = math.floor(self.grid.grid_size / 2)
+        c = int(self.grid.grid_size / 2)
         self.agent.pos = (c, c)
 
         self.t = 0
