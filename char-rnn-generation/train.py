@@ -42,16 +42,16 @@ loss_avg = 0
 def train(inp, target):
     hidden = decoder.init_hidden()
     decoder.zero_grad()
-    loss = 0
+    total_loss = 0
 
     for c in range(args.chunk_len):
         output, hidden = decoder(inp[c], hidden)
-        loss += criterion(output, target[c])
-
+        loss = criterion(output, target[c])
+        total_loss += loss.data[0]
     loss.backward()
     decoder_optimizer.step()
 
-    return loss.data[0] / args.chunk_len
+    return total_loss / args.chunk_len
 
 def save():
     save_filename = os.path.splitext(os.path.basename(args.filename))[0] + '.pt'

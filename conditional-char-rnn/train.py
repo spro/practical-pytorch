@@ -19,16 +19,16 @@ from model import *
 def train(category_tensor, input_line_tensor, target_line_tensor):
     hidden = rnn.init_hidden()
     optimizer.zero_grad()
-    loss = 0
+    total_loss = 0
     
     for i in range(input_line_tensor.size()[0]):
         output, hidden = rnn(category_tensor, input_line_tensor[i], hidden)
-        loss += criterion(output, target_line_tensor[i])
-
+        loss = criterion(output, target_line_tensor[i])
+        total_loss += loss.data[0]
     loss.backward()
     optimizer.step()
     
-    return output, loss.data[0] / input_line_tensor.size()[0]
+    return output, total_loss / input_line_tensor.size()[0]
 
 def time_since(t):
     now = time.time()
