@@ -1,4 +1,5 @@
 # https://github.com/spro/practical-pytorch
+# -*- coding: utf-8 -*-
 
 import torch
 import torch.nn as nn
@@ -67,7 +68,7 @@ try:
         if epoch % args.print_every == 0:
             print('[%s (%d %d%%) %.4f]' % (time_since(start), epoch, epoch / args.n_epochs * 100, loss))
             #print(generate(decoder, 'Wh', 100), '\n')
-            print generate(decoder, all_characters=all_characters, prime_str='Title:', predict_len=500)
+            print generate(decoder, all_characters=all_characters, prime_str='अध्याय', predict_len=500)
 
     print("Saving...")
     save()
