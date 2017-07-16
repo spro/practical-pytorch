@@ -1,4 +1,5 @@
 # https://github.com/spro/practical-pytorch
+# -*- coding: utf-8 -*-
 
 import torch
 
@@ -32,14 +33,20 @@ def generate(decoder, all_characters, prime_str='A', predict_len=100, temperatur
 
 if __name__ == '__main__':
     # Parse command line arguments
-    import argparse
+    import argparse, pickle
     argparser = argparse.ArgumentParser()
     argparser.add_argument('filename', type=str)
     argparser.add_argument('-p', '--prime_str', type=str, default='A')
     argparser.add_argument('-l', '--predict_len', type=int, default=100)
     argparser.add_argument('-t', '--temperature', type=float, default=0.8)
+    argparser.add_argument('-f', '--charset-file', type=str, default='charset.pickle')
     args = argparser.parse_args()
-
+    print args
+    with open(args.charset_file) as fd:
+        all_characters = pickle.load(fd)
     decoder = torch.load(args.filename)
     del args.filename
-    print(generate(decoder, **vars(args)))
+    del args.charset_file
+    print all_characters
+    #print(generate(decoder=decoder, all_characters=all_characters, **vars(args)))
+    print generate(decoder, all_characters=all_characters, prime_str='अध्याय', predict_len=500)

@@ -57,6 +57,9 @@ def train(inp, target):
 def save():
     save_filename = os.path.splitext(os.path.basename(args.filename))[0] + '.pt'
     torch.save(decoder, save_filename)
+    import pickle
+    with open("charset.pickle", "w") as fd:
+        pickle.dump(all_characters, fd)
     print('Saved as %s' % save_filename)
 
 try:
