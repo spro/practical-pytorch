@@ -21,14 +21,14 @@ argparser.add_argument('--learning_rate', type=float, default=0.01)
 argparser.add_argument('--chunk_len', type=int, default=200)
 args = argparser.parse_args()
 
-file, file_len = read_file(args.filename)
+file, file_len, all_characters, n_characters = read_file(args.filename)
 
 def random_training_set(chunk_len):
     start_index = random.randint(0, file_len - chunk_len)
     end_index = start_index + chunk_len + 1
     chunk = file[start_index:end_index]
-    inp = char_tensor(chunk[:-1])
-    target = char_tensor(chunk[1:])
+    inp = char_tensor(chunk[:-1], all_characters)
+    target = char_tensor(chunk[1:], all_characters)
     return inp, target
 
 decoder = RNN(n_characters, args.hidden_size, n_characters, args.n_layers)
@@ -66,7 +66,8 @@ try:
 
         if epoch % args.print_every == 0:
             print('[%s (%d %d%%) %.4f]' % (time_since(start), epoch, epoch / args.n_epochs * 100, loss))
-            print(generate(decoder, 'Wh', 100), '\n')
+            #print(generate(decoder, 'Wh', 100), '\n')
+            print generate(decoder, all_characters=all_characters, prime_str='Title:', predict_len=500)
 
     print("Saving...")
     save()
@@ -74,4 +75,3 @@ try:
 except KeyboardInterrupt:
     print("Saving before quit...")
     save()
-
