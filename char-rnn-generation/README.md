@@ -35,7 +35,7 @@ It his zersit at he
 ### Training options
 
 ```
-Usage: generate.py [filename] [options]
+Usage: train.py [filename] [options]
 
 Options:
 --n_epochs         Number of epochs to train
