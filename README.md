@@ -2,6 +2,8 @@
 
 Learn PyTorch with project-based tutorials. These tutorials demonstrate modern techniques with readable code and use regular data from the internet.
 
+**Note: Check back soon for updates to support PyTorch 0.4 and 1.0.**
+
 ## Tutorials
 
 #### Series 1: RNNs for NLP
