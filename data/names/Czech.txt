@@ -358,7 +358,7 @@ Pudel
 Purdes
 Quasninsky
 Raffel
-Rafaj1
+Rafaj
 Ransom
 Rezac
 Riedel
@@ -471,7 +471,7 @@ Trnkova
 Uerling
 Uhlik
 Urbanek
-Urbanek1
+Urbanek
 Urbanovska
 Urista
 Ustohal
@@ -500,7 +500,7 @@ Wiesner
 Wizner
 Weiss
 Werlla
-Whitmire1
+Whitmire
 Widerlechner
 Wilchek
 Wondracek
