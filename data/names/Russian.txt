@@ -4392,7 +4392,7 @@ Jevakhov
 Jevanov
 Jeverjeev
 Jevlakov
-Jevolojnov,
+Jevolojnov
 Jgutov
 Jiboedov
 Jidelev
@@ -5233,7 +5233,7 @@ Lyndyaev
 Lyrschikov
 Lysak
 Lysakov
-Lysansky,
+Lysansky
 Lysenko
 Lysenkov
 Lysenny
@@ -5252,7 +5252,7 @@ Lysyansky
 Lysyh
 Lysykh
 Lysyuk
-Lytkin,
+Lytkin
 Lyvin
 Lyzhenkov
 Lyzhin
@@ -7938,30 +7938,6 @@ Tzenin
 Tzenkovsky
 Tziolkovsky
 Tzipushtanov
-To The First  Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
-To The First Page
 Uchaev
 Uchaikin
 Uchitel
