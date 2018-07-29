@@ -1,8 +1,10 @@
+**These tutorials have been merged into [the official PyTorch tutorials](https://github.com/pytorch/tutorials). Please go there for better maintained versions of these tutorials compatible with newer versions of PyTorch.**
+
+---
+
 ![Practical Pytorch](https://i.imgur.com/eBRPvWB.png)
 
 Learn PyTorch with project-based tutorials. These tutorials demonstrate modern techniques with readable code and use regular data from the internet.
-
-**Note: Check back soon for updates to support PyTorch 0.4 and 1.0.**
 
 ## Tutorials
 
