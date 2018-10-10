@@ -18,7 +18,7 @@ def unicodeToAscii(s):
 
 # Read a file and split into lines
 def readLines(filename):
-    lines = open(filename).read().strip().split('\n')
+    lines = open(filename, encoding="utf8").read().strip().split('\n')
     return [unicodeToAscii(line) for line in lines]
 
 # Build the category_lines dictionary, a list of lines per category
