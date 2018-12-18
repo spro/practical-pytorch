@@ -46,7 +46,7 @@ def train(inp, target):
 
     for c in range(args.chunk_len):
         output, hidden = decoder(inp[c], hidden)
-        loss += criterion(output, target[c])
+        loss += criterion(output, target[c].view([1]))
 
     loss.backward()
     decoder_optimizer.step()
