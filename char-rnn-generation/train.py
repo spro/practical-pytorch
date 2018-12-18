@@ -51,7 +51,7 @@ def train(inp, target):
     loss.backward()
     decoder_optimizer.step()
 
-    return loss.data[0] / args.chunk_len
+    return loss.data.item() / args.chunk_len
 
 def save():
     save_filename = os.path.splitext(os.path.basename(args.filename))[0] + '.pt'
