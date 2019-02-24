@@ -24,7 +24,7 @@ args = argparser.parse_args()
 file, file_len = read_file(args.filename)
 
 def random_training_set(chunk_len):
-    start_index = random.randint(0, file_len - chunk_len)
+    start_index = random.randint(0, file_len - chunk_len - 1)
     end_index = start_index + chunk_len + 1
     chunk = file[start_index:end_index]
     inp = char_tensor(chunk[:-1])
