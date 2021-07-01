@@ -42,7 +42,7 @@ def train(category_tensor, line_tensor):
 
     optimizer.step()
 
-    return output, loss.data[0]
+    return output, loss.item()
 
 # Keep track of losses for plotting
 current_loss = 0
